@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Reset de estilos para garantir consistência */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #ffffff; /* Cor suave de fundo, lembrando a natureza */
+      color: #3e3e3e; /* Texto em um tom neutro */
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding-top: 60px; /* Espaço para não cobrir o conteúdo com a navbar fixa */
+    }
+
+    .title {
+      color: #2e8b57; /* Verde escuro, remetendo à vegetação */
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      background-color: #e9f7e6; /* Cor de fundo suave */
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #2d6a4f; /* Verde mais escuro, em tom de floresta */
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    /* Barra de navegação fixa */
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      background: #2e8b57; /* Verde de folhas e plantas */
+      padding: 10px;
+      border-radius: 8px;
+      margin: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+
+    /* Estilização dos quadros */
+    .quadro, .descartar-item, .impacto-item {
+      background: #4caf50; /* Verde mais claro, cor associada à natureza */
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+      text-align: left;
+      position: relative;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .quadro h2, .descartar-item h2, .impacto-item h3 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      color: #0a0a09; /* Tom mais claro para destaque */
+    }
+
+    .quadro p, .descartar-item p, .impacto-item p {
+      font-size: 1.1em;
+      color: #f1f1f1; /* Texto mais claro para fácil leitura */
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+    }
+
+    /* Exibir a descrição ao passar o mouse sobre o quadro */
+    .quadro:hover p, .descartar-item:hover p, .impacto-item:hover p {
+      opacity: 1;
+    }
+
+    /* Aumentar o quadro ao passar o mouse */
+    .quadro:hover, .descartar-item:hover, .impacto-item:hover {
+      transform: scale(1.05);
+    }
+
+    /* Adicionando título para as seções de "Onde Descartar" e "Impactos Ambientais" */
+    .section-title {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #2d6a4f; /* Cor de título mais forte, alinhado com o tema */
+    }
+
+    /* Mapa interativo */
+    .map-container {
+      width: 100%;
+      height: 400px;
+      background-color: #dcedc8; /* Cor mais clara, para um fundo que lembre o ar livre */
+      margin: 30px 0;
+    }
+
+    .coleta-seletiva {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .lixeira {
+            width: 200px;
+            height: 250px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .descricao {
+            font-size: 14px;
+            margin-top: 5px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #f1f1f1; /* Cor de fundo mais clara */
+            color: #333; /* Texto em tom neutro */ 
+              text-align: left;}
+           
+              .coleta-seletiva {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+
+
+  </style>
+</head>
+<body>
+  <div class="title"><p>ReciclaFácil</p></div>
+  <h2>No EcoPontos, nossa missão é ajudar você a encontrar os locais ideais para descartar seus resíduos de forma correta e consciente.</h2>
+
+  <!-- Barra de navegação fixa -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="mapa_interativo.html">Mapa Interativo</a></li>
+      <li><a href="#tipos-de-residuos">Tipos de Resíduos</a></li>
+      <li><a href="#onde-des-residuos">Impactos Ambientais</a></li>
+      <li><a href="#inpact-ambinte">Dicas e Informações</a></li>
+      <li><a href="dicas_informacoes.html">sobre</a></li>
+    </ul>
+  </nav>
+
+  <!-- Mapa interativo - Agora posicionado logo abaixo da barra de navegação -->
+  <div class="map-container">
+    <p>Aqui será inserido o Mapa Interativo.</p>
+  </div>
+
+  <!-- Tipos de Resíduos -->
+  <div id="tipos-de-residuos">
+    <div class="section-title">Tipos de Resíduos</div>
+  </div>
+
+  <div class="container">
+    <div class="quadro">
+      <h2>Resíduos Sólidos Urbanos (RSU)</h2>
+      <p>Incluem resíduos domésticos e comerciais, como restos de alimentos, embalagens, papel, plástico, vidro, metal, etc.</p>
+    </div>
+    <div class="quadro">
+      <h2>Resíduos Orgânicos</h2>
+      <p>Compreendem restos de alimentos, folhas, cascas de frutas e vegetais, e outros materiais biodegradáveis.</p>
+    </div>
+    <div class="quadro">
+      <h2>Resíduos Recicláveis</h2>
+      <p>Devem ser separados por tipo (papel, plástico, vidro, metal) e descartados em pontos de coleta seletiva ou centros de reciclagem.</p>
+    </div>
+    <div class="quadro">
+      <h2>Resíduos Perigosos</h2>
+      <p>Devem ser levados a pontos de coleta específicos, como ecopontos, para tratamento adequado. Não devem ser misturados com resíduos comuns, pois podem causar contaminação.</p>
+    </div>
+    <div class="quadro">
+      <h2>Resíduos Industriais</h2>
+      <p>O descarte deve seguir as regulamentações específicas para cada tipo de resíduo industrial, e geralmente é responsabilidade da empresa geradora garantir o tratamento e descarte adequado.</p>
+    </div>
+    <div class="quadro">
+      <h2>Resíduos de Construção e Demolição (RCD)</h2>
+      <p>Devem ser levados a áreas de triagem específicas ou aterros apropriados. Alguns materiais podem ser reciclados ou reutilizados.</p>
+    </div>
+    <div class="quadro">
+      <h2>Resíduos Hospitalares</h2>
+      <p>Devem ser descartados em lixeiras especiais disponíveis em estabelecimentos de saúde. Eles são encaminhados para tratamento específico, como incineração ou esterilização.</p>
+    </div>
+    <div class="quadro">
+      <h2>Resíduos Eletrônicos</h2>
+      <p>Devem ser levados a pontos de coleta específicos para eletrônicos, muitas vezes disponíveis em lojas de eletrônicos ou programas de reciclagem municipais.</p>
+    </div>
+  </div>
+
+  <!-- Onde descartar os resíduos -->
+  <div id="onde-des-residuos">
+    <div class="section-title">Onde Descartar os Resíduos?</div>
+  </div>
+
+  <div class="container">
+    <div class="descartar-item">
+      <h2>Resíduos Sólidos Urbanos (RSU)</h2>
+      <p>Podem ser descartados em lixeiras comuns, de preferência separando resíduos recicláveis dos não recicláveis.</p>
+    </div>
+    <div class="descartar-item">
+      <h2>Resíduos Orgânicos</h2>
+      <p>Compreendem restos de alimentos, folhas, cascas de frutas e vegetais, e outros materiais biodegradáveis.</p>
+    </div>
+    <div class="descartar-item">
+      <h2>Resíduos Recicláveis</h2>
+      <p>Devem ser levados a pontos de coleta seletiva, centros de reciclagem ou ecopontos. Verifique a separação por tipo de material.</p>
+    </div>
+    <div class="descartar-item">
+      <h2>Resíduos Perigosos</h2>
+      <p>Leve-os a pontos de coleta específicos, como centros de tratamento de resíduos perigosos ou ecopontos. Nunca descarte em locais não apropriados.</p>
+    </div>
+    <div class="descartar-item">
+      <h2>Resíduos Industriais</h2>
+      <p>Devem ser tratados e descartados de acordo com as normas regulatórias específicas, com suporte de empresas especializadas no gerenciamento desses resíduos.</p>
+    </div>
+  </div>
+
+  <!-- Impactos Ambientais -->
+  <div id="inpact-ambinte">
+    <div class="section-title">Impactos Ambientais</div>
+  </div>
+
+  <div class="container">
+    <div class="impacto-item">
+      <h3>Contaminação do Solo</h3>
+      <p>O descarte inadequado de resíduos, como plásticos, metais e substâncias tóxicas, pode contaminar o solo, prejudicando a flora e fauna locais.</p>
+    </div>
+    <div class="impacto-item">
+      <h3>Emissões de Gases de Efeito Estufa</h3>
+      <p>Resíduos em aterros geram gases como o metano, contribuindo para o aquecimento global.</p>
+    </div>
+    <div class="impacto-item">
+      <h3>Poluição da Água</h3>
+      <p>Resíduos mal descartados podem ser levados para corpos d'água, prejudicando a qualidade da água e afetando ecossistemas aquáticos.</p>
+    </div>
+  </div>
+  
+  <br>
+  <br><br>
+  <br><br>
+  <br>
+<h1>lixeiras coloridas de coleta seletiva</h1>
+<br>
+<br>
+<div class= "coleta-seletiva">
+<h2>Qual é a funcionalidade das lixeiras coletivas?
+  </h2></div>
+<div class="coleta-seletiva">
+<h3>As lixeiras de coleta seletiva têm a função de separar os resíduos de acordo com o material, para facilitar a reciclagem e reduzir o impacto ambiental. Cada cor de lixeira
+   é associada a um tipo específico de material, ajudando a destinar corretamente os resíduos para os processos de reciclagem. Aqui está um resumo da funcionalidade de cada 
+   uma</h3>
+   <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <div class="lixeiras-container">
+    
+    <div class="lixeira azul">Papel
+    <img src="img/azul.jpg" alt="Papel" width="200" height="200">
+    </div>
+    <div class="descricao"><h2>Lixeira Azul (Papel): É destinada para materiais como papel, papelão, jornais, revistas e cadernos. Esses itens podem ser reciclados para criar 
+      novos produtos de papel e reduzir o impacto ambiental.
+
+    </h2>
+
+    </div>
+    <br><br>
+
+    <div class="lixeira vermelho">Plástico 
+        
+        <img src="img/vermelho.jpg" alt="Plástico" width="200" height="200">
+    </div>
+    <div class="descricao"><h2> Lixeira Verde (Vidro): Deve ser usada para garrafas de vidro, potes e outros itens de vidro. O vidro é 100% reciclável e pode ser reutilizado várias vezes sem perder 
+    a qualidade.
+</h2></div>
+    <br><br>
+    <div class="lixeira verde">Vidro
+      <img src="img/verde.jpg" alt="Vidro" width="200" height="200">
+    </div>
+    <div class="descricao"><h2> Lixeira Vermelha (Plástico): É destinada para embalagens plásticas, garrafas PET, sacolas e outros produtos de plástico. O plástico é um material que demora muito tempo para se decompor na natureza, 
+      por isso é importante reciclá-lo para reduzir a poluição ambiental.</h2></div>
+    
+      <br>
+    
+      <br>
+    <div class="lixeira amarelo">Metal
+        
+        <img src="img/amarelo.jpg" alt="Metal" width="200" height="200">
+    </div>
+    <div class="descricao"><h2> Lixeira Amarela (Metal): Deve ser usada para latas de alumínio, latas de aço, panelas e outros produtos de metal. O metal é um material que pode ser reciclado várias vezes sem perder suas propriedades, 
+      economizando recursos naturais e energia.</h2></div>
+    <br>
+    <br>
+    <div class="lixeira marrom">Orgânicos
+        
+        <img src="img/marron2.jpg" alt="Orgânicos" width="200" height="200">
+    </div>
+    <div class="descricao"><h2> Lixeira Marrom (Orgânicos): É destinada para restos de alimentos, cascas de frutas, legumes, folhas, entre outros resíduos orgânicos. Esses materiais podem ser compostados para gerar adubo orgânico, 
+      reduzindo a quantidade de resíduos enviados para aterros sanitários.</h2></div> 
+
+    <br>
+    <br>
+    <div class="lixeira preto">Madeira
+      <img src="img/preto.jpg" alt="Madeira" width="200" height="200">
+    </div>
+   
+    <div class="descricao"><h2> Lixeira Preta (Madeira): Deve ser usada para resíduos de madeira, como móveis quebrados, paletes, caixas e outros itens de madeira. A madeira pode ser reciclada ou reutilizada para criar novos produtos, 
+      evitando o desmatamento e o desperdício de recursos naturais.</h2></div>
+
+    <br>
+    <br>
+    <div class="lixeira cinza">Não recicláveis
+        
+          <img src="img/cinza.jpg" alt="Não recicláveis" width="200" height="200">
+    </div>
+    <div class="descricao"><h2> Lixeira Cinza (Não Recicláveis): É destinada para resíduos que não podem ser reciclados, como fraldas descartáveis, guardanapos sujos, embalagens metalizadas, entre outros materiais não recicláveis. 
+      Esses itens devem ser descartados corretamente para evitar a contaminação de materiais recicláveis e o meio ambiente.</h2></div>
+    <br>
+    <br>
+        <div class="lixeira branco">Hospitalares
+        <img src="img/branco.jpg" alt="Hospitalares" width="200" height="200">
+        </div>
+        <div class="descricao"><h2> Lixeira Branca (Hospitalares): Deve ser usada para resíduos hospitalares, como seringas, agulhas, luvas, máscaras, entre outros materiais contaminados. Esses resíduos devem ser descartados em lixeiras específicas e 
+          encaminhados para tratamento adequado, visando a proteção da saúde pública e do meio ambiente.</h2></div>
+        <br>
+        <br> 
+        <div class="lixeira roxo">Perigosos 
+          <img src="img/roxo.jpg" alt="Perigosos" width="200" height="200">
+        </div>
+        <div class="descricao"><h2> Lixeira Roxa (Perigosos): É destinada para resíduos perigosos, como pilhas, baterias, lâmpadas fluorescentes, produtos químicos, entre outros materiais tóxicos. Esses resíduos devem ser manuseados com cuidado e 
+          descartados em locais apropriados para evitar danos à saúde e ao meio ambiente.</h2></div>  
+  </div>
+</body>
+</html>
+
+</body>
+</html>
